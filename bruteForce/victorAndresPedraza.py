@@ -41,6 +41,7 @@ class Championship:
 
 	def printTeams(self):
 		for i in range(0,len(self.teams)):
+			print(i+1,end=". ")
 			print(self.teams[i].name,end=" - ")
 			print(self.teams[i].pointsEarned,end=" - ")
 			print(self.teams[i].pointsPlayed)
@@ -91,13 +92,17 @@ class Championship:
 		self.moveTeam(self.auxTeams4)
 
 	def playMatch(self,team1,team2):
-		#print(team1.name,end=" vs ")
-		#print(team2.name)
+		g1=team1.darGoles()
+		g2=team2.darGoles()
+		print(team1.name,end=": ")
+		print(g1,end=" - ")
+		print(team2.name,end=": ")
+		print(g2)
 
-		if(team1.darGoles()<team2.darGoles()):
+		if(g1<g2):
 			team1.chandePoints(0)
 			team2.chandePoints(3)
-		elif(team1.darGoles()>team2.darGoles()):
+		elif(g1>g2):
 			team1.chandePoints(3)
 			team2.chandePoints(0)
 		else:
@@ -153,10 +158,16 @@ class Championship:
 		self.journey+=1
 		self.updateTeams()
 
-	def simChampionship(self):
+	def simChampionship(self,time):
 		for i in range(0,len(self.teams)-1):
 			self.simJourney()
 
+		print()
+		print("FINAL CAMPEONATO # ",end="")
+		print(time)
+		print("TABLA DE POSICIONES FINAL CAMEONATO # ",end="")
+		print(time)
+		self.printTeams()
 		self.addChampion()
 
 	def validateTeams(teams):
@@ -177,9 +188,10 @@ class Championship:
 
 	def verifyTotalChampion(self):
 		print()
-		print("TABLA DE CAMPEONES")
+		print("TABLA DE CAMPEONES FINAL DE SIMULACIÓN")
 		self.teams=sorted(self.teams,key=lambda i: int(i.champWinned),reverse=True)
 		for i in range(0,len(self.teams)):
+			print(i+1,end=". ")
 			print(self.teams[i].name,end=" -> VECES CAMPEÓN: ")
 			print(self.teams[i].champWinned)
 
@@ -197,6 +209,8 @@ class Championship:
 		print("CAMPEONES:")
 		for i in range(0,len(champs)):
 			print(champs[i].name)
+		print("\n")
+		print("BY VictorAndres20(github)\nFIN DE SIMULACIÓN\n")
 
 class Reader:
 	def readTeams(self,path):
@@ -220,7 +234,7 @@ class Main:
 			simuTimes=int(input("Cantidad de torneos a simular: "))
 			print()
 			for i in range(0,simuTimes):
-				ch.simChampionship()
+				ch.simChampionship(i+1)
 				ch.restartTeams()
 				ch.prepareChampionship()
 			ch.verifyTotalChampion()
