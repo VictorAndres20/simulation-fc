@@ -58,7 +58,7 @@ class Championship:
 		elif(g1>g2):
 			team1.changePoints(3)
 			team2.changePoints(0)
-			return team2
+			return team1
 		else:
 			return playMatch(team1,team2)
 
@@ -70,6 +70,10 @@ class Championship:
 			return self.playMatch(teams[0],teams[1])
 		else:
 			return self.playMatch(self.simuchampionship(teams[:int(len(teams)/2)]),self.simuchampionship(teams[int(len(teams)/2):]))
+
+	def verifyCampion(self):
+		print("CAMPEÓN:")
+		print(self.teams[0].name)
 
 class Reader:
 	def readTeams(self,path):
@@ -93,6 +97,8 @@ class Main:
 			ch.simuchampionship(ch.teams)
 			ch.organizeTable()
 			ch.printTeams()
+			ch.verifyCampion()
+			print("\nFIN SIMULACIÓN\nBY VictorAndres20(github)\n")
 		else:
 			print("Error en la cantidad de equipos")		
 
